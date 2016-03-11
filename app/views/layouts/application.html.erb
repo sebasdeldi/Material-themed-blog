@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RailsBlog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+  <%= javascript_include_tag :defaults %>
+
+</head>
+<body>
+	
+<header>
+	<nav>
+	  <div class="nav-wrapper">
+
+	  	<div class="container">
+	  		<%=link_to "Material Blog", root_path, :class => "brand-logo" %>
+	  		<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+	  		<ul class="right hide-on-med-and-down">
+	  		  <%if signed_in? %>
+		  		  <li> <%= link_to 'Sign out', destroy_user_session_path, :method => :delete
+ %></li>
+		  		  
+		  		<%else%>
+		  			<li> <%=link_to "Register", new_user_registration_path %></li>
+		  			<li> <%=link_to "Log In", new_user_session_path %></li>
+		  	   <%end%>
+	  		</ul>
+	  		<ul class="side-nav" id="mobile-demo">
+	  		  <%if signed_in? %>
+		  		  <li> <%= link_to 'Sign out', destroy_user_session_path, :method => :delete
+ %></li>
+		  		  
+		  		<%else%>
+		  			<li> <%=link_to "Register", new_user_registration_path %></li>
+		  			<li> <%=link_to "Log In", new_user_session_path %></li>
+		  	   <%end%>
+	  		</ul>
+	  	</div>
+	    
+	  </div>
+	</nav>
+</header>
+<div class="container">
+	<div class="wrapper">
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+	</div>
+	
+</div>
+
+
+
+<%= yield %>
+
+</body>
+</html>

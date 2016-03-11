@@ -1,0 +1,31 @@
+
+
+<%= link_to new_post_path, class: "btn-floating btn-large waves-effect waves-light red" do %>
+    <i class="material-icons">add</i>
+<% end %>
+
+<div class="container">
+	<div class="row index-wrapper">
+	    
+
+	    <% @posts.each do |post| %>
+		    <div class="col s6 m6">
+
+		      <div class="card">
+		        <div class="card-image waves-effect waves-block waves-light">
+		          <img class="activator" src="<%=post.image_url%>">
+		        </div>
+		        <div class="card-content">
+		          <span class="card-title activator grey-text text-darken-4"><%=post.name%><i class="material-icons right">more_vert</i></span>
+		          <p>Posted by <b><%=post.user.email%></b> | at <b><%=post.created_at%></b></p>
+		          <p><%= link_to "Read complete post", post_path(post) %></p>
+		        </div>
+		        <div class="card-reveal">
+		          <span class="card-title grey-text text-darken-4"><%=post.name%><i class="material-icons right">close</i></span>
+		          <p><%=truncate(post.body, :length => 250)%></p>
+		        </div>
+		      </div>
+		    </div>
+	   	<%end%>
+	</div>	        
+</div>

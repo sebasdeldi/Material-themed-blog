@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="wrapper">
+		<%=form_for @post do |f| %>
+			<%= f.label :name %><br>
+			<%=f.text_field :name%>
+			<%= f.label :body %><br>
+			<%=f.text_area :body , :class => "materialize-textarea"%>
+			<%= f.label :image_url %><br>
+			<%=f.url_field :image_url%>
+			<%=f.submit :class =>"waves-effect waves-light btn" %>
+		<%end%>
+	</div>
+
+
+</div>
