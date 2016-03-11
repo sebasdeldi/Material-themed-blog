@@ -8,13 +8,48 @@
 		           <span class="card-title"><%= @post.name%></span>
 		         </div>
 		         <div class="card-content">
-		           <p><%= @post.body%></p>
+		           <p><%= markdown(@post.body)%></p>
 		         </div>
 		         <div class="card-action">
-		           <p>Posted by <b><%=@post.user.email%></b> | at <b><%=@post.created_at%></b></p>
+		           <p>Posted by <b><%=@post.user.email%></b> <br> at <b><%=@post.created_at%></b></p>
 		         </div>
 		       </div>
 		     </div>
-		   </div>
+		</div>
+		<div class="comments">
+			<% @post.comments.each do |comment| %>
+				<div class="row">
+				  <div class="col s12 ">
+				    <div class="card-panel teal">
+				      <span class="white-text">
+				      	<%= markdown(comment.body)%>
+				      	<br>
+				      	Post by <b><%=comment.user.email%></b>
+				      </span>
+				    </div>
+				  </div>
+				</div>
+			<%end%>
+
+
+			<% if signed_in? %>
+			  <%= form_for [@post, @post.comments.build] do |f| %>
+			    <div class="form-group">
+			      <%= f.text_area :body, class: "materialize-textarea",  placeholder: "Comment! (max 250 characters)", maxlength: "250" %>
+			    </div>
+
+			    <div>
+			      <%= f.submit "Comment", class: "waves-effect waves-light btn" %>
+			    </div>
+			  <% end %>
+			<% else %>
+
+			<div  class="comment-no-logged-msg">
+				<center><span>You need to be logged in, to comment!</span></center>
+			</div>
+				
+			<% end %>
+			
+		</div>
 	</div>
 </div>

@@ -1,22 +1,14 @@
 class CommentsController < ApplicationController
-  def index
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def destroy
-  end
-
-  def new
-  end
 
   def create
+    post = Post.find(params[:post_id])
+    post.comments.create(comments_params)
+    redirect_to post
   end
 
-  def update
-  end
+  private
+    def comments_params
+      params.require(:comment).permit(:body).merge(user: current_user)
+    end
+
 end

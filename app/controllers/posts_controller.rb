@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @posts = Post.all
   end
@@ -21,7 +22,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build
   end
 
-  def create
+  def create 
     @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to root_path
@@ -31,8 +32,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = current_user.posts.build(post_params)
-    if @post.update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
       redirect_to root_path
     else
       render :new
